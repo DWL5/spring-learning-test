@@ -13,20 +13,23 @@ import java.util.List;
 @RequestMapping("/media-type")
 public class MediaTypeController {
 
+    @PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createUser(@RequestBody User user) {
         Long id = 1L;
         return ResponseEntity.created(URI.create("/users/" + id)).build();
     }
 
+    @GetMapping(path = "/users", produces = MediaType.TEXT_HTML_VALUE)
+    public String userPage() {
+        return "user page";
+    }
+
+    @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<User>> showUser() {
         List<User> users = Arrays.asList(
                 new User("이름", "email"),
                 new User("이름", "email")
         );
         return ResponseEntity.ok().body(users);
-    }
-
-    public String userPage() {
-        return "user page";
     }
 }
