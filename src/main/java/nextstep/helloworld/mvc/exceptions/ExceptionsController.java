@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/exceptions")
 public class ExceptionsController {
 
+
     @GetMapping("/hello")
     public ResponseEntity exceptionHandler() {
         throw new CustomException();
@@ -22,6 +23,7 @@ public class ExceptionsController {
         throw new HelloException();
     }
 
+    @ExceptionHandler(CustomException.class)
     public ResponseEntity<String> handle() {
         return ResponseEntity.badRequest().body("CustomException");
     }
