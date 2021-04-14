@@ -59,7 +59,11 @@ public class QueryingDAO {
      */
     public List<Customer> findAllCustomers() {
         String sql = "select id, first_name, last_name from customers";
-        return null;
+        List<Customer> customers = this.jdbcTemplate.query(sql,
+                ((rs, rowNum) ->
+                        new Customer(rs.getString("first_name"),
+                                rs.getString("last_name"))));
+        return customers;
     }
 
     /**
@@ -67,6 +71,10 @@ public class QueryingDAO {
      */
     public List<Customer> findCustomerByFirstName(String firstName) {
         String sql = "select id, first_name, last_name from customers where first_name = ?";
-        return null;
+        List<Customer> customers = this.jdbcTemplate.query(sql,
+                ((rs, rowNum) ->
+                        new Customer(rs.getString("first_name"),
+                                rs.getString("last_name"))), firstName);
+        return customers;
     }
 }
