@@ -29,7 +29,8 @@ public class QueryingDAO {
      */
     public int count() {
         String sql = "select count(*) from customers";
-        return 0;
+        int rowCount = this.jdbcTemplate.queryForObject(sql, Integer.class);
+        return rowCount;
     }
 
     /**
