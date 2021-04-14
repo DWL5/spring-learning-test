@@ -38,7 +38,8 @@ public class QueryingDAO {
      */
     public String getLastName(Long id) {
         String sql = "select last_name from customers where id = ?";
-        return null;
+        String lastName = this.jdbcTemplate.queryForObject(sql, String.class, id);
+        return lastName;
     }
 
     /**
